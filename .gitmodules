@@ -9,3 +9,7 @@
 	path = glfw-rs
 	url = https://github.com/rlane/glfw-rs
 	branch = gamedev-kit
+[submodule "noise-rs"]
+	path = noise-rs
+	url = https://github.com/rlane/noise-rs
+	branch = gamedev-kit
