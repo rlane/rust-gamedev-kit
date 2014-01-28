@@ -17,3 +17,6 @@
 	path = gl-rs
 	url = https://github.com/rlane/gl-rs
 	branch = gamedev-kit
+[submodule "glfw"]
+	path = glfw
+	url = https://github.com/glfw/glfw
