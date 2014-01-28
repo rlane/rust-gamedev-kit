@@ -5,3 +5,7 @@
 	path = cgmath-rs
 	url = https://github.com/rlane/cgmath-rs
 	branch = gamedev-kit
+[submodule "glfw-rs"]
+	path = glfw-rs
+	url = https://github.com/rlane/glfw-rs
+	branch = gamedev-kit
