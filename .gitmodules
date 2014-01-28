@@ -1,3 +1,7 @@
 [submodule "rust"]
 	path = rust
 	url = https://github.com/mozilla/rust
+[submodule "cgmath-rs"]
+	path = cgmath-rs
+	url = https://github.com/rlane/cgmath-rs
+	branch = gamedev-kit
