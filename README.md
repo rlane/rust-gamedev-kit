@@ -15,3 +15,22 @@ Libraries
 * [gl-rs](https://github.com/bjz/gl-rs)
 * [cgmath-rs](https://github.com/bjz/cgmath-rs)
 * [noise-rs](https://github.com/bjz/noise-rs)
+
+Usage
+=====
+
+When you clone the repository, and after updating it, you need to run the build
+script:
+
+    ./build.sh
+
+This installs Rust and all the libraries to the `install` directory. It also
+creates a `env.sh` script that defines environment variables telling Rust where
+the installed libraries are.
+
+To get ready to build a project that uses these libraries:
+
+    source env.sh
+
+This sets up PATH and RUST_PATH. Now you can cd to your project's directory and
+run `rustpkg install`.
