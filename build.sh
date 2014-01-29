@@ -1,6 +1,6 @@
 #!/bin/bash -eux
-RUST_GAMEDEV_KIT_ROOT=$(dirname $(readlink -f $0))
-cd $RUST_GAMEDEV_KIT_ROOT
+cd $(dirname $0)
+RUST_GAMEDEV_KIT_ROOT=$(pwd -P)
 
 git submodule update --init
 
