@@ -2,47 +2,57 @@
 cd $(dirname $0)
 RUST_GAMEDEV_KIT_ROOT=$(pwd -P)
 
-git submodule update --init
+if [[ -z ${FAST:-} ]]; then
+    git submodule update --init
 
-rm -rf install
+    rm -rf install
 
-(
-    cd rust
-    ./configure --prefix=$RUST_GAMEDEV_KIT_ROOT/install
-    make
-    make install
-)
+    (
+        set -eux
+        cd rust
+        ./configure --prefix=$RUST_GAMEDEV_KIT_ROOT/install
+        make clean all install
+    )
 
-(
-    cd install/lib
-    ln -sf rustlib/i686-unknown-linux-gnu/lib/libnative-* .
-)
+    (
+        set -eux
+        rm -rf glfw/build
+        mkdir glfw/build
+        cd glfw/build
+        cmake -DCMAKE_INSTALL_PREFIX:PATH=$RUST_GAMEDEV_KIT_ROOT/install \
+            -DBUILD_SHARED_LIBS:BOOL=ON \
+            -DGLFW_BUILD_EXAMPLES:BOOL=OFF \
+            -DGLFW_BUILD_TESTS:BOOL=OFF \
+            -DGLFW_BUILD_DOCS:BOOL=OFF \
+            ..
+        make all install
+    )
+fi
 
 PATH=$RUST_GAMEDEV_KIT_ROOT/install/bin:$PATH
-export RUST_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib
+TARGET=$(make -f target.mk)
+LIBDIR=$RUST_GAMEDEV_KIT_ROOT/install/lib/rustlib/$TARGET/lib
 
-which rustpkg
+which rustc
 
 (
-    rm -rf glfw/build
-    mkdir glfw/build
-    cd glfw/build
-    cmake -DCMAKE_INSTALL_PREFIX:PATH=$RUST_GAMEDEV_KIT_ROOT/install \
-        -DBUILD_SHARED_LIBS:BOOL=ON \
-        -DGLFW_BUILD_EXAMPLES:BOOL=OFF \
-        -DGLFW_BUILD_TESTS:BOOL=OFF \
-        -DGLFW_BUILD_DOCS:BOOL=OFF \
-        ..
-    make all install
+    set -eux
+    # HACK to make linking to glfw easier
+    cd $LIBDIR
+    ln -sf ../../../libglfw* .
 )
 
-(cd glfw-rs && rustpkg clean glfw && rustpkg install --opt-level=3 glfw)
-(cd cgmath-rs && rustpkg clean cgmath && rustpkg install --opt-level=3 cgmath)
-(cd noise-rs && rustpkg clean noise && rustpkg install --opt-level=3 noise)
-(cd gl-rs && rustpkg clean gl && rustpkg install --opt-level=3 gl)
+(
+    set -eux
+    cd glfw-rs
+    rm -rf build
+    mkdir -p build
+    cd build
+    PKG_CONFIG_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib/pkgconfig cmake ..
+    make lib
+    cp lib/* $LIBDIR
+)
 
-cat > $RUST_GAMEDEV_KIT_ROOT/env.sh <<EOS
-export LD_LIBRARY_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib:\$LD_LIBRARY_PATH
-export PATH=$RUST_GAMEDEV_KIT_ROOT/install/bin:\$PATH
-export RUST_PATH=$RUST_GAMEDEV_KIT_ROOT/glfw-rs:$RUST_GAMEDEV_KIT_ROOT/cgmath-rs:$RUST_GAMEDEV_KIT_ROOT/noise-rs:$RUST_GAMEDEV_KIT_ROOT/gl-rs:$RUST_GAMEDEV_KIT_ROOT/install/lib
-EOS
+rustc --out-dir $LIBDIR --dylib --opt-level 3 gl-rs/src/gl/lib.rs
+rustc --out-dir $LIBDIR --dylib --opt-level 3 noise-rs/src/noise/lib.rs
+rustc --out-dir $LIBDIR --dylib --opt-level 3 cgmath-rs/src/cgmath/lib.rs

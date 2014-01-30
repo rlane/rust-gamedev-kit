@@ -8,7 +8,7 @@ together.
 I (rlane) did not write any of the included libraries. See the links to the
 original repositories below. A few libraries have been lightly patched.
 
-The Rust version used is 0.9.
+The Rust version used is 0.10-pre.
 
 Libraries
 =========
@@ -27,16 +27,9 @@ script:
 
     ./build.sh
 
-This installs Rust and all the libraries to the `install` directory. It also
-creates a `env.sh` script that defines environment variables telling Rust where
-the installed libraries are.
-
-To get ready to build a project that uses these libraries:
-
-    source env.sh
-
-This sets up PATH and RUST_PATH. Now you can cd to your project's directory and
-run `rustpkg install`.
+This installs Rust and all the libraries to the `install` directory.
+You can add the `install/bin` directory to your PATH, or run rustc
+directly from there when compiling your project.
 
 Platforms
 =========
