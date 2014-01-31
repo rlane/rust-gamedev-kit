@@ -46,11 +46,8 @@ which rustc
     set -eux
     cd glfw-rs
     rm -rf build
-    mkdir -p build
-    cd build
-    PKG_CONFIG_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib/pkgconfig cmake ..
-    make lib
-    cp lib/* $LIBDIR
+    PKG_CONFIG_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib/pkgconfig make lib
+    cp build/lib/* $LIBDIR
 )
 
 rustc --out-dir $LIBDIR --dylib --opt-level 3 gl-rs/src/gl/lib.rs
