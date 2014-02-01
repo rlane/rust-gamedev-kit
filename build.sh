@@ -11,7 +11,9 @@ if [[ -z ${FAST:-} ]]; then
         set -eux
         cd rust
         ./configure --prefix=$RUST_GAMEDEV_KIT_ROOT/install
-        make clean all install
+        make clean
+        make all
+        make install
     )
 
     (
@@ -25,7 +27,8 @@ if [[ -z ${FAST:-} ]]; then
             -DGLFW_BUILD_TESTS:BOOL=OFF \
             -DGLFW_BUILD_DOCS:BOOL=OFF \
             ..
-        make all install
+        make all
+        make install
     )
 fi
 
