@@ -22,13 +22,6 @@ LIBDIR=$RUST_GAMEDEV_KIT_ROOT/install/lib/rustlib/$TARGET/lib
 
 (
     set -eux
-    # HACK to make linking to glfw easier
-    cd $LIBDIR
-    ln -sf ../../../libglfw* .
-)
-
-(
-    set -eux
     cd glfw-rs
     rm -rf build
     PKG_CONFIG_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib/pkgconfig make lib
