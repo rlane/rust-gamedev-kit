@@ -4,4 +4,4 @@ before_install:
 install:
   - sudo apt-get install rust-nightly cmake xorg-dev libglu1-mesa-dev
 script:
-  -  git submodule update --init && ./build-libraries.sh
+  -  ./build-libraries.sh
