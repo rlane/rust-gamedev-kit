@@ -1,6 +1,8 @@
 rust-gamedev-kit
 ================
 
+![Build status](https://travis-ci.org/rlane/rust-gamedev-kit.png)
+
 This is a set of git submodules that point to versions of the Rust compiler and
 various libraries (mostly relevant to game development) that are known to work
 together.
