@@ -4,6 +4,7 @@ RUST_GAMEDEV_KIT_ROOT=$(pwd -P)
 
 TARGET=$(rustc -v | grep '^host:' | cut -d ' ' -f 2)
 LIBDIR=$RUST_GAMEDEV_KIT_ROOT/install/lib/rustlib/$TARGET/lib
+mkdir -p $LIBDIR
 
 (
     set -eux
