@@ -29,6 +29,7 @@ mkdir -p $LIBDIR
     cp build/lib/* $LIBDIR
 )
 
-rustc --out-dir $LIBDIR --dylib --opt-level 3 gl-rs/src/gl/lib.rs
-rustc --out-dir $LIBDIR --dylib --opt-level 3 noise-rs/src/noise/lib.rs
-rustc --out-dir $LIBDIR --dylib --opt-level 3 cgmath-rs/src/cgmath/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 gl-rs/src/gl/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 noise-rs/src/noise/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 cgmath-rs/src/cgmath/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 hgl-rs/lib.rs

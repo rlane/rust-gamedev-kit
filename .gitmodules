@@ -20,3 +20,6 @@
 [submodule "glfw"]
 	path = glfw
 	url = https://github.com/glfw/glfw
+[submodule "hgl-rs"]
+	path = hgl-rs
+	url = https://github.com/cmr/hgl-rs
