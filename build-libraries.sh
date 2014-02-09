@@ -25,11 +25,12 @@ mkdir -p $LIBDIR
     set -eux
     cd glfw-rs
     rm -rf build
-    PKG_CONFIG_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib/pkgconfig make lib
-    cp build/lib/* $LIBDIR
+    export PKG_CONFIG_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib/pkgconfig 
+    make lib LINK_ARGS=`pkg-config --libs glfw3`
+    cp lib/* $LIBDIR
 )
 
-rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 gl-rs/src/gl/lib.rs
-rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 noise-rs/src/noise/lib.rs
-rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 cgmath-rs/src/cgmath/lib.rs
-rustc --out-dir $LIBDIR -L $LIBDIR --dylib --opt-level 3 hgl-rs/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 gl-rs/src/gl/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 noise-rs/src/noise/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 cgmath-rs/src/cgmath/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 hgl-rs/lib.rs
