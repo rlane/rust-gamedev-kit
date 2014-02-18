@@ -39,3 +39,8 @@ Platforms
 =========
 
 Tested on OS X 10.9 and 32-bit Ubuntu 12.04.
+
+Users
+=====
+
+* [cubeland](https://github.com/rlane/cubeland)
