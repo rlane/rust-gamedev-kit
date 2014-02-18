@@ -26,7 +26,8 @@ mkdir -p $LIBDIR
     cd glfw-rs
     rm -rf build
     export PKG_CONFIG_PATH=$RUST_GAMEDEV_KIT_ROOT/install/lib/pkgconfig 
-    make lib LINK_ARGS=`pkg-config --libs glfw3`
+    LINK_ARGS=$(pkg-config --libs glfw3)
+    make lib LINK_ARGS="$LINK_ARGS"
     cp lib/* $LIBDIR
 )
 
