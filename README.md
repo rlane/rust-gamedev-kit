@@ -21,6 +21,7 @@ Libraries
 * [cgmath-rs](https://github.com/bjz/cgmath-rs)
 * [noise-rs](https://github.com/bjz/noise-rs)
 * [hgl-rs](https://github.com/cmr/hgl-rs)
+* [color-rs](https://github.com/bjz/color-rs)
 
 Usage
 =====
