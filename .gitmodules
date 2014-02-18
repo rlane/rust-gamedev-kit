@@ -23,3 +23,6 @@
 [submodule "hgl-rs"]
 	path = hgl-rs
 	url = https://github.com/cmr/hgl-rs
+[submodule "color-rs"]
+	path = color-rs
+	url = https://github.com/bjz/color-rs
