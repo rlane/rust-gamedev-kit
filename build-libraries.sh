@@ -34,5 +34,5 @@ mkdir -p $LIBDIR
 rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 gl-rs/src/gl/lib.rs
 rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 noise-rs/src/noise/lib.rs
 rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 cgmath-rs/src/cgmath/lib.rs
-rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 hgl-rs/lib.rs
+rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 hgl-rs/src/lib.rs
 rustc --out-dir $LIBDIR -L $LIBDIR --crate-type dylib --opt-level 3 color-rs/src/lib.rs
