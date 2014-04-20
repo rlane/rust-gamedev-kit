@@ -10,7 +10,7 @@ together.
 I (rlane) did not write any of the included libraries. See the links to the
 original repositories below. A few libraries have been lightly patched.
 
-The Rust version used is 0.10-pre.
+The Rust version used is 0.10.
 
 Libraries
 =========
